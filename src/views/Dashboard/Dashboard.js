@@ -39,6 +39,7 @@ import {
   TableContainer,
   Select,
   Alert,
+  useToast
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 // import ReactPlayer from "react-player";
@@ -84,7 +85,6 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
 import { CardComponent } from "theme/additions/card/Card";
 
-
 export default function Dashboard1(props) {
   // console.log("props",props);
   const [sName, setsName] = useState("");
@@ -94,13 +94,21 @@ export default function Dashboard1(props) {
   const [sDropDown, setDropDown] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [tempTable, setTempTable] = useState();
+  const [saveData, setSaveDate] = useState(false);
+  const [steps, setSetp] = useState(1);
+  const toast = useToast();
+  const [emails, setEmails] = useState([]);
   
-  const ModalShow = (idx, avatar) => {
-    setsName(tempArray[idx]["cName"]);
-    setsEmail(tempArray[idx]["cEmail"]);
-    setsImage(avatar);
-    setsData(tempArray[idx]["cData"]);
-    onOpen();
+  const ModalShow = (email) => {
+    if (email.cType === 1) {
+      setSpeEmailClicked(true);
+    } else {
+      setsName(email["cName"]);
+      setsEmail(email["cEmail"]);
+      setsImage(email["cAvatar"]);
+      setsData(email["cData"]);
+      onOpen();
+    }
   }
   const [series, setSeries] = useState([
     {
@@ -114,11 +122,22 @@ export default function Dashboard1(props) {
       data: [400, 291, 121, 117, 25, 133, 121, 211, 147, 25, 201, 203],
     },
   ]);
-
   useEffect(() => {
-    
-  }, [])
-
+    if ((props.flg_pic && !props.flg_meeting)) {
+      setTimeout(() => {
+        const tempArray = [
+          {
+            cName: "Bank Manager",
+            cEmail: "peter@wilsonlawfirm.com",
+            cData: "Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.\n\n Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.hey can someone help me with smth in HTML for web designing i can send you the requirements and stuff for how its supposed ot be done just ping me if you can help i need it done by friday i ofc will be doing it aswell with you but my HTML knowledge is not that big so",
+            cType: 1,
+            cAvatar: oldMan
+          }
+        ]
+        setEmails(tempArray);
+      }, 2000)
+    }
+  })
   const overlayRef = React.useRef();
   
   const value = "$100.000";
@@ -131,8 +150,7 @@ export default function Dashboard1(props) {
   const { setUser } = useAuth();
   let { user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [dropDownMenu, setDropDownMenu] = useState([{
+  const tempValue = [{
     'entry': '10000',  'account': 'Bank Account CDN$', 'checked': false
   }, {
     'entry': '11000',  'account': 'Accounts Receivable', 'checked': false
@@ -218,12 +236,22 @@ export default function Dashboard1(props) {
     'entry': '62000',  'account': 'Interest Expense' , 'checked': false
   }, {
     'entry': '80000',  'account': 'Income Tax Expense' , 'checked': false
-  }]);
+  }];
+  const [dropDownMenu, setDropDownMenu] = useState(tempValue);
   // const [dropDownMenuData, setDropDownMenuData] = useState([]);
   const [rendered, setRendered] = useState(false);
   const [countOfTr, setCountOfTr] = useState(10);
   const [totalValue, setTotalValue] = useState([0, 0]);
+  const [speEmailClicked, setSpeEmailClicked] = useState(false);
   const handleSelect = (index) => {
+    if (!dropDownMenu[index].checked && tableData.length >= 10) {
+      toast({
+        title: "You can't select items over 10.",
+        status: 'warning',
+        isClosable: true,
+      })
+      return false;  
+    } 
     var arr = tableData;
     var dropDownMenuData = dropDownMenu;
     dropDownMenuData[index].checked = !dropDownMenuData[index].checked;
@@ -250,34 +278,6 @@ export default function Dashboard1(props) {
     setRendered(!rendered);
   }
 
-  const tempArray = [
-    {
-      cName: "Bank Manager",
-      cEmail: "peter@wilsonlawfirm.com",
-      cData: "Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.\n\n Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.hey can someone help me with smth in HTML for web designing i can send you the requirements and stuff for how its supposed ot be done just ping me if you can help i need it done by friday i ofc will be doing it aswell with you but my HTML knowledge is not that big so"
-    },
-    {
-      cName: "PR Coordinator",
-      cEmail: "pr@coordinator.com",
-      cData: "Hi Guys, did anyone tried genetic algorithm in cryptokitties ? I am working on something similar to genetic algorithm (I need to form a set of new attributes based on selected two set of attributes and then need to form an image based on new attributes) ~ we are fusing two images and generating a new image. fusion algorithm can be resided either in frontend side(react) or backend side(Anchor program) and then pushing it to solana. But I want to know the risk factors, pros and cons while doing it in React or Rust.\n\n what are the pros and cons if i do it on React, and what are the pros and cons if i do it on Rust, any help will be highly appreciated. which one is the best approach for fusion algorithm ? frontend side or anchor program ? thanks in advance !"
-    },
-    {
-      cName: "Merch Manager",
-      cEmail: "merch@manager.com",
-      cData: "Basically anything they put in the job description + most likely how to configure whatever equipment they use (like Cisco switches, how to do XYZ in Cisco), how to configure  cloud appliances like Palo Alto, most likely how to set up on prem to cloud connections (Directconnect, VPNs, etc) how to create site to site VPNs, knowing hospitals they ALL have super legacy group 2-5 DH IKEv1 IPsec tunnels… \n\nSo learn how to set those up hey can someone help me with smth in HTML for web designing i can send you the requirements and stuff for how its supposed ot be done just ping me if you can help i need it done by friday i ofc will be doing it aswell with you but my HTML knowledge is not that big so"
-    },
-    {
-      cName: "Agent",
-      cEmail: "peter@agent.com",
-      cData: "Hi Guys, did anyone tried genetic algorithm in cryptokitties ? I am working on something similar to genetic algorithm (I need to form a set of new attributes based on selected two set of attributes and then need to form an image based on new attributes) ~ we are fusing two images and generating a new image.\n\n fusion algorithm can be resided either in frontend side(react) or backend side(Anchor program) and then pushing it to solana. But I want to know the risk factors, pros and cons while doing it in React or Rust. what are the pros and cons if i do it on React, and what are the pros and cons if i do it on Rust, any help will be highly appreciated. which one is the best approach for fusion algorithm ? frontend side or anchor program ? thanks in advance !"
-    },
-    {
-      cName: "Kyle",
-      cEmail: "peter@Kyle.com",
-      cData: "Hi Guys, did anyone tried genetic algorithm in cryptokitties ? I am working on something similar to genetic algorithm (I need to form a set of new attributes based on selected two set of attributes and then need to form an image based on new attributes) ~ we are fusing two images and generating a new image. fusion algorithm can be resided either in frontend side(react) or backend side(Anchor program) and then pushing it to solana. But I want to know the risk factors, pros and cons while doing it in React or Rust.\n\n what are the pros and cons if i do it on React, and what are the pros and cons if i do it on Rust, any help will be highly appreciated. which one is the best approach for fusion algorithm ? frontend side or anchor program ? thanks in advance !"
-    }
-  ]
-
   const SignOut = async () => {
     await AuthApi.Logout(user);
     await setUser(null);
@@ -291,17 +291,20 @@ export default function Dashboard1(props) {
       if (i >= tableData.length) {
         temp.push(
           <Tr key={`tbl_${i}`}>
-            <Td></Td><Td></Td><Td></Td><Td></Td>
+            <Td pl="5px"></Td>
+            <Td pl="5px"></Td>
+            <Td pl="5px"></Td>
+            <Td pl="5px"></Td>
           </Tr>
         );
       }
       else {
         temp.push(
           <Tr key={`tbl_${i}`} maxH="10px" id={i}>
-            <Td paddingBottom="6px" paddingTop="6px">{i+1}</Td>
-            <Td paddingBottom="6px" paddingTop="6px">{tableData[i].acc}</Td>
-            <Td paddingBottom="6px" paddingTop="6px"><Input type="number" h="98%" minW="100px" borderRadius="3px" id={`debit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
-            <Td paddingBottom="6px" paddingTop="6px"><Input type="number" h="98%" minW="100px" borderRadius="3px" id={`credit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{i+1}</Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{tableData[i].acc}</Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`debit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`credit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
           </Tr>
         );
       }
@@ -336,14 +339,68 @@ export default function Dashboard1(props) {
   }
 
   const func_save = () => {
-
+    var status = true;
+    if (status) {
+      toast({
+        title: "Success!",
+        status: 'success',
+        isClosable: 'true'
+      });
+      setDropDownMenu(tempValue);
+      setTableData([]);
+      setTotalValue([0, 0]);
+      setSetp(steps+1);
+    } else {
+      toast({
+        title: "Maybe you selected some wrong items.",
+        status: 'warning',
+        isClosable: 'true'
+      });
+    }
   }
-  
+
+
+  const func_card = () => {
+    var temp = [];
+    emails.map((item, index) => {
+      temp.push(
+        <Card minH="83px" minWidth="100px" onClick={() => ModalShow(item)}>
+          <CardBody>
+            <Flex flexDirection="row" align="center" justify="center" w="calc(100% - 100px)">
+              <Stat me="auto">
+                <StatLabel
+                  fontSize="sm"
+                  color="#1ac6ff"
+                  fontWeight="bold"
+                  pb=".1rem"
+                >
+                  Bank Manager
+                </StatLabel>
+                <Flex style={{ marginTop: "10px" }}>
+                  <StatNumber fontSize="17px">
+                    <ReadMoreText text="Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."/>
+                  </StatNumber>
+                </Flex>
+              </Stat>
+            </Flex>
+            <Image
+              src={oldMan}
+              alt="old man image"
+              width="100px" height="120px"
+              style={{ position: "absolute", bottom: "0", right: "0" }}
+            />
+          </CardBody>
+        </Card>
+      );
+    })
+    return temp;
+  }
+
   return (
     <Box w="100%" h="100%" backgroundColor="gray.200" padding="5" position="relative">
       <Box 
         w="calc(50% - 20px)"
-        h="100%"
+        h="98%"
         backgroundImage={`url(${ImgCard})`}
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
@@ -352,7 +409,7 @@ export default function Dashboard1(props) {
         borderRadius="10px"
         right="5"
         zIndex="2"
-        display={!(props.flg_pic && !props.flg_meeting) ? "none" : "flex"}
+        display={!(props.flg_pic && !props.flg_meeting) ? "none" : speEmailClicked ? "flex" : "none"}
         justifyContent="center"
         alignItems="center"
       >
@@ -360,7 +417,7 @@ export default function Dashboard1(props) {
           <Box w="100%" h="20%" display="flex">
             <Box w="50%" height="100%" display="flex" justifyContent="center" flexWrap="wrap">
               <Button marginTop="40px" w="80%">{ JSON.parse(localStorage.getItem('user')).username }</Button>
-              <Button w="80%" onClick={() => setDropDown(!sDropDown)}>Journal Entry #</Button>
+              <Button w="80%" onClick={() => setDropDown(!sDropDown)}>{`1-${steps}`}</Button>
               <Box display={sDropDown === false ? "none" : "block" } position="absolute" w="300px" h="500px" zIndex="4" top="calc(20% + 10px)" right="calc(90% - 300px)" backdropFilter="blur(5px)" boxShadow="3px 3px 4px 4px lightgrey" overflowY="scroll">
                 {
                   dropDownMenu.map((item, index) => (
@@ -381,15 +438,15 @@ export default function Dashboard1(props) {
             </Box>
           </Box>
 
-          <Box w="100%" h="80%" backgroundColor="white" borderRadius="5px">
+          <Box w="100%" h="73%" backgroundColor="white" borderRadius="5px">
             <TableContainer onClick={() => setDropDown(false)}>
               <Table variant='simple'>
                 <Thead>
                   <Tr>
-                    <Th w="20%">Entry #</Th>
-                    <Th w="40%">Account #-Account Name</Th>
-                    <Th w="20%">Debit</Th>
-                    <Th w="20%">Credit</Th>
+                    <Th w="20%" pl="5px" pr="0">no</Th>
+                    <Th w="40%" pl="5px" pr="0">Account #-Account Name</Th>
+                    <Th w="20%" pl="5px" pr="0">Debit</Th>
+                    <Th w="20%" pl="5px" pr="0">Credit</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -411,44 +468,14 @@ export default function Dashboard1(props) {
                 </Tfoot>
               </Table>
             </TableContainer>
-            <Box w="100%" paddingTop="10px" display="flex" justifyContent="end">
-              <Button mr="30px" bgColor="#f0731a" borderRadius="2px" onClick={() => {
-                func_save();
-              }}>Save</Button>
-            </Box>
+          </Box>
+          <Box w="100%" paddingTop="10px" display="flex" justifyContent="end">
+            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" onClick={() => {
+              func_save();
+            }}>Save</Button>
           </Box>
         </Box>
       </Box>
-
-      {/* <Modal isOpen={true} isCentered>
-        <ModalOverlay />
-        <ModalContent borderRadius={10}>
-          <ModalBody padding={0}>
-          <TableContainer height="80vh">
-              <Table variant='simple' fontSize="15px" overflow="scroll"> 
-                <Tbody>
-                  {
-                    dropDownMemu.map((item, index) => 
-                      (
-                        <Tr h="10px">
-                          <Td h="10px">
-                            { index }
-                          </Td>
-                          <Td h="10px">
-                            { item.account }
-                          </Td>
-                        </Tr>
-                      )
-                    )
-                  }
-                </Tbody>
-                <Tfoot>
-                </Tfoot>
-              </Table>
-            </TableContainer>
-          </ModalBody>
-        </ModalContent>
-      </Modal> */}
       {/* <VideoPlay /> */}
         <FormControl zIndex="1">
           <Stack direction='row' spacing={4} style={{ position: "absolute", right: "0" }}>
@@ -464,143 +491,24 @@ export default function Dashboard1(props) {
 
           <SimpleGrid columns={{ sm: 2, md: 2, xl: 2 }} spacing="24px">
             {/* left */}
-            <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
-              <Stat me="auto">
+            <Box columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
+              <Stat me="auto" marginBottom="10px">
                 <StatLabel
                   fontSize="lg"
                   color="gray.600"
                   fontWeight="bold"
                   marginLeft="20px;"
+                  display={emails.length > 0 ? 'block' : 'none'}
                 >
                   New Emails
                 </StatLabel>
               </Stat>
-              <Card minH="83px" minWidth="100px" onClick={() => ModalShow(0, oldMan)}>
-                <CardBody>
-                  <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                      <StatLabel
-                        fontSize="sm"
-                        color="#1ac6ff"
-                        fontWeight="bold"
-                        pb=".1rem"
-                      >
-                        Bank Manager
-                      </StatLabel>
-                      <Flex style={{ marginTop: "10px" }}>
-                        <StatNumber >
-                          <ReadMoreText text="Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
-                        </StatNumber>
-                      </Flex>
-                    </Stat>
-                  </Flex>
-                  <Image
-                    src={oldMan}
-                    alt="old man image"
-                    width="100px" height="120px"
-                    style={{ position: "absolute", bottom: "0", right: "0" }}
-                  />
-                </CardBody>
+              {
+                func_card()
+              }
+            </Box>
 
-              </Card>
-              <Card minH="83px" minWidth="100px" onClick={() => ModalShow(1, oldWoman)}>
-                <CardBody>
-                  <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                      <StatLabel
-                        fontSize="sm"
-                        color="#1ac6ff"
-                        fontWeight="bold"
-                      >
-                        PR Coordinator
-                      </StatLabel>
-                      <Flex style={{ marginTop: "10px" }}>
-                        <StatNumber fontSize="sm" color={textColor} paddingRight="20%" >
-                          <ReadMoreText text=" Word on the street is that tonight's show will be yur hightest grossing show yet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
-
-                        </StatNumber>
-                      </Flex>
-                    </Stat>
-                    <Image
-                      src={oldWoman}
-                      alt="old woman image"
-                      width="100px" height="120px"
-                      style={{ position: "absolute", bottom: "0", right: "0" }}
-                    />
-                  </Flex>
-                </CardBody>
-              </Card>
-              
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="lg"
-                  color="gray.600"
-                  fontWeight="bold"
-                  marginLeft="20px;"
-                >
-                  Recent Emails
-                </StatLabel>
-              </Stat>
-              <Card minH="83px" minWidth="100px" onClick={() => ModalShow(2, Man)}>
-                <CardBody>
-                  <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                      <StatLabel
-                        fontSize="sm"
-                        color="#1ac6ff"
-                        fontWeight="bold"
-                        pb=".1rem"
-                      >
-                        Merch Manager
-                      </StatLabel>
-                      <Flex style={{ marginTop: "10px" }}>
-                        <StatNumber fontSize="sm" color={textColor} paddingRight="20%">
-                          <ReadMoreText text="Hey Mate, bad news. Some of the merch from the truck was stolen at last night's gig. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
-                        </StatNumber>
-                      </Flex>
-                    </Stat>
-                    <Image
-                      src={Man}
-                      alt="chakra image"
-                      width="100px" height="120px"
-                      style={{ position: "absolute", bottom: "0", right: "0" }}
-                    />
-                  </Flex>
-
-                </CardBody>
-              </Card>
-              <Card minH="83px" minWidth="100px" onClick={() => ModalShow(3, Woman)}>
-                <CardBody>
-                  <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                      <StatLabel
-                        fontSize="sm"
-                        color="#1ac6ff"
-                        fontWeight="bold"
-                        pb=".1rem"
-                      >
-                        Agent
-                      </StatLabel>
-                      <Flex style={{ marginTop: "10px" }}>
-                        <StatNumber fontSize="sm" color={textColor} paddingRight="20%" variant="solid">
-                          <ReadMoreText text=" Hey: Good news about last nights gig. We booked again tonight on your day off. No costs for gear setup and 1/2 price venue rental! Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
-
-                        </StatNumber>
-
-                      </Flex>
-                    </Stat>
-                    <Image
-                      src={Woman}
-                      alt="chakra image"
-                      width="100px" height="120px"
-                      style={{ position: "absolute", bottom: "0", right: "0" }}
-                    />
-                  </Flex>
-                </CardBody>
-              </Card>
-
-            </SimpleGrid>
-
+            {/* Don't touch it */}
             <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
               <Stat me="auto">
                 <StatLabel
@@ -656,6 +564,7 @@ export default function Dashboard1(props) {
                 <Text fontSize="small" fontWeight="bold" color="blue.400"><a style={{ color: "black" }}>View</a>: Revenue | Expenses | Loans | Capital | Net income</Text>
               </Card>
             </SimpleGrid>
+            
           </SimpleGrid>
         </Flex>
 

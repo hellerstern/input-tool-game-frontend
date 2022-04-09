@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 
 import useSound from 'use-sound';
-import phoneRing from '../../assets/sounds/Phone ringing.mp3';
+import phoneRing from '../../assets/sounds/ringing.mp3';
 
 export default function SizeExample() {
     const player = useRef(null);
