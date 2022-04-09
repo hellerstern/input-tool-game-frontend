@@ -49,8 +49,8 @@ import ImgBack from '../assets/img/6.jpg';
 import ImgHead from '../assets/img/head.png';
 import ImgZoom from '../assets/img/zoom_icon.jpg';
 import imgMeeting from '../assets/img/meeting.png'
-
-export default function Dashboard(props) {
+import Dashboard1 from "views/Dashboard/Dashboard";
+export default function Dashboard() {
   // Colors Start
     const textColor="#bfc0d9";
     const mainColor="#111421";
@@ -59,9 +59,7 @@ export default function Dashboard(props) {
     const borderColor="#313247";
     const btnColor="#05c1fa";
   // Colors End
-
-
-  const { ...rest } = props;
+  // const { ...rest } = props;
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
   const [fixed, setFixed] = useState(false);
@@ -212,7 +210,7 @@ export default function Dashboard(props) {
                 />
                 <Input placeholder='Search to ...' color={textColor} border='0px' disableUnderline={false}/>
               </InputGroup>
-              <Box width="50px" height="40px" backgroundImage={`url(${ImgHead})`} backgroundSize="contain" backgroundRepeat="no-repeat" backgroundPosition="center" borderRadius="5px" ml='20px' />
+              <Box width="50px" height="40px" backgroundImage={`url(${JSON.parse(localStorage.getItem('user')).avatar})`} backgroundSize="contain" backgroundRepeat="no-repeat" backgroundPosition="center" borderRadius="5px" ml='20px' />
             </Box>
           </Box>
 
@@ -302,12 +300,10 @@ export default function Dashboard(props) {
               </Stack>
             </Box>
           </Box>
-           
-          {/* right */}
           <Box width="25%" height="100%" backgroundColor={layoutColor} position="absolute" top="0" right="0" zIndex="1" borderLeft="1px" borderColor={borderColor} borderRadius="0 30px 30px 0">
             <Box width="100%" height="100%" display="flex" alignItems="stretch" flexWrap="wrap" justifyContent="center" position="relative">
               <Box width="100%" marginTop="90px" padding="20px" fontSize="17px">
-                <Text color={textColor}>Hi {`Username`}</Text>
+                <Text color={textColor}>Hi {`${JSON.parse(localStorage.getItem('user')).firstname+' '+JSON.parse(localStorage.getItem('user')).lastname}`}</Text>
                 <Text marginTop="20px" color={textColor}>My name is Richard. I've been asked to get you setled at the firm and get you acquainted with the office and our systems.</Text>
                 <Text marginTop="20px" color={textColor}>I see you've made it to your desk and we've turned on your computer you are alreay doing better then the fast guy!</Text>
               </Box>
@@ -365,16 +361,16 @@ export default function Dashboard(props) {
             xl: "calc(100% - 285px)",
           }}
           backgroundColor="gray.200">
-          {getRoute() ? (
+          <Dashboard1 flg_pic={showPic} flg_meeting={showMeeting}/>
+          {/* {console.log(getRoute() ? (
             <PanelContent>
               <PanelContainer>
                 <Switch>
                   {getRoutes(routes)}
-                  <Redirect from="/admin" to="/admin/dashboard" />
                 </Switch>
               </PanelContainer>
             </PanelContent>
-          ) : null}
+          ) : null)} */}
         </MainPanel>
       </div>
     </ChakraProvider>

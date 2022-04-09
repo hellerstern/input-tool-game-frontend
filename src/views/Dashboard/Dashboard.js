@@ -38,6 +38,7 @@ import {
   Td,
   TableContainer,
   Select,
+  Alert,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 // import ReactPlayer from "react-player";
@@ -83,7 +84,9 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
 import { CardComponent } from "theme/additions/card/Card";
 
-export default function Dashboard() {
+
+export default function Dashboard1(props) {
+  // console.log("props",props);
   const [sName, setsName] = useState("");
   const [sEmail, setsEmail] = useState("");
   const [sImage, setsImage] = useState("");
@@ -237,6 +240,7 @@ export default function Dashboard() {
         },
         credit: {
           str: '',
+
           num: 0
         }
       });
@@ -245,8 +249,6 @@ export default function Dashboard() {
     setDropDownMenu(dropDownMenuData);
     setRendered(!rendered);
   }
-
-
 
   const tempArray = [
     {
@@ -324,6 +326,19 @@ export default function Dashboard() {
     setTotalValue(temp);
   }
 
+  const func_get_date = () => {
+    var txt = '';
+    const today = new Date();
+    txt += today.toLocaleString('default', {month: 'short'});
+    txt += "-" + today.getDate() + "-";
+    txt += today.getFullYear();
+    return txt;
+  }
+
+  const func_save = () => {
+
+  }
+  
   return (
     <Box w="100%" h="100%" backgroundColor="gray.200" padding="5" position="relative">
       <Box 
@@ -337,14 +352,14 @@ export default function Dashboard() {
         borderRadius="10px"
         right="5"
         zIndex="2"
-        display="flex"
+        display={!(props.flg_pic && !props.flg_meeting) ? "none" : "flex"}
         justifyContent="center"
         alignItems="center"
       >
         <Box width="80%" height="95%" display="flex" justifyContent="center" alignItems="center" flexWrap="wrap">
           <Box w="100%" h="20%" display="flex">
             <Box w="50%" height="100%" display="flex" justifyContent="center" flexWrap="wrap">
-              <Button marginTop="40px" w="80%">Client</Button>
+              <Button marginTop="40px" w="80%">{ JSON.parse(localStorage.getItem('user')).username }</Button>
               <Button w="80%" onClick={() => setDropDown(!sDropDown)}>Journal Entry #</Button>
               <Box display={sDropDown === false ? "none" : "block" } position="absolute" w="300px" h="500px" zIndex="4" top="calc(20% + 10px)" right="calc(90% - 300px)" backdropFilter="blur(5px)" boxShadow="3px 3px 4px 4px lightgrey" overflowY="scroll">
                 {
@@ -357,13 +372,17 @@ export default function Dashboard() {
             <Box w="50%" height="100%" display="flex" justifyContent="center" alignItems="stretch" flexWrap="wrap">
               <Box w="100%" height="45%" backgroundImage={`url(${ImgTornodo})`} backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize="contain"></Box>
               <Box w="100%" height="45%" marginTop="25px">
-                <Button w="100%">Date</Button>
+                <Button w="100%">
+                  {
+                    func_get_date()
+                  }
+                </Button>
               </Box>
             </Box>
           </Box>
 
           <Box w="100%" h="80%" backgroundColor="white" borderRadius="5px">
-            <TableContainer>
+            <TableContainer onClick={() => setDropDown(false)}>
               <Table variant='simple'>
                 <Thead>
                   <Tr>
@@ -393,7 +412,9 @@ export default function Dashboard() {
               </Table>
             </TableContainer>
             <Box w="100%" paddingTop="10px" display="flex" justifyContent="end">
-              <Button mr="30px" bgColor="#f0731a" borderRadius="2px">Save</Button>
+              <Button mr="30px" bgColor="#f0731a" borderRadius="2px" onClick={() => {
+                func_save();
+              }}>Save</Button>
             </Box>
           </Box>
         </Box>
@@ -647,7 +668,6 @@ export default function Dashboard() {
             </ModalBody>
           </ModalContent>
         </Modal>
-
-      </Box >
+      </Box>
   );
 }
