@@ -84,6 +84,8 @@ import { BsArrowRight, BsCardImage } from "react-icons/bs";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
 import { CardComponent } from "theme/additions/card/Card";
+import Sound from './Audio';
+import './please.css';
 
 export default function Dashboard1(props) {
   // console.log("props",props);
@@ -122,8 +124,11 @@ export default function Dashboard1(props) {
       data: [400, 291, 121, 117, 25, 133, 121, 211, 147, 25, 201, 203],
     },
   ]);
+  const [myFlg, setMyFlg] = useState(true);
   useEffect(() => {
-    if ((props.flg_pic && !props.flg_meeting)) {
+
+    if ((props.flg_pic && !props.flg_meeting) && myFlg) {
+      Sound(true);
       setTimeout(() => {
         const tempArray = [
           {
@@ -134,11 +139,11 @@ export default function Dashboard1(props) {
             cAvatar: oldMan
           }
         ]
+        setMyFlg(false);
         setEmails(tempArray);
       }, 2000)
     }
   })
-  const overlayRef = React.useRef();
   
   const value = "$100.000";
   const history = useHistory();
@@ -303,8 +308,8 @@ export default function Dashboard1(props) {
           <Tr key={`tbl_${i}`} maxH="10px" id={i}>
             <Td paddingBottom="6px" paddingTop="6px" pl="5px">{i+1}</Td>
             <Td paddingBottom="6px" paddingTop="6px" pl="5px">{tableData[i].acc}</Td>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`debit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`credit_${i}`} onChange={(e) => func_table_update(e)}></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`debit_${i}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`credit_${i}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
           </Tr>
         );
       }
@@ -398,9 +403,8 @@ export default function Dashboard1(props) {
 
   return (
     <Box w="100%" h="100%" backgroundColor="gray.200" padding="5" position="relative">
-      <Box 
-        w="calc(50% - 20px)"
-        h="98%"
+      <Box className="main"
+        h="700px"
         backgroundImage={`url(${ImgCard})`}
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
@@ -469,14 +473,15 @@ export default function Dashboard1(props) {
               </Table>
             </TableContainer>
           </Box>
-          <Box w="100%" paddingTop="10px" display="flex" justifyContent="end">
+          <Box w="100%" paddingTop="10px" display="flex" justifyContent="space-between">
+            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" onClick={() => setSpeEmailClicked(false)} ml="30px">Close</Button>
             <Button mr="30px" bgColor="#f0731a" borderRadius="10px" onClick={() => {
               func_save();
             }}>Save</Button>
           </Box>
         </Box>
       </Box>
-      {/* <VideoPlay /> */}
+      <VideoPlay />
         <FormControl zIndex="1">
           <Stack direction='row' spacing={4} style={{ position: "absolute", right: "0" }}>
             <Button colorScheme='telegram' backgroundColor="blue.200" variant='solid' width="100px;" size="sm">
@@ -509,7 +514,7 @@ export default function Dashboard1(props) {
             </Box>
 
             {/* Don't touch it */}
-            <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
+            <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px" opacity={0}>
               <Stat me="auto">
                 <StatLabel
                   fontSize="lg"

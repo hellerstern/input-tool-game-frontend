@@ -1,0 +1,8 @@
+.main {
+  width: calc(50% - 20px);
+}
+@media screen and (max-width: 830px) {
+  .main {
+    width: calc(100% - 25px);
+  }
+}
