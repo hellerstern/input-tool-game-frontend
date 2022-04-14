@@ -239,7 +239,7 @@ function Sidebar(props) {
   // SIDEBAR
   return (
     <Box ref={mainPanel}>
-      <Box display={{ sm: "none", xl: "block" }} position="fixed">
+      <Box display={{ sm: "none", xl: "block" }} position="absolute">
         <Box
           bg={sidebarBg}
           transition={variantChange}
@@ -251,7 +251,7 @@ function Sidebar(props) {
           my={{
             sm: "16px",
           }}
-          h="calc(100vh - 32px)"
+          h="65vh"
           ps="20px"
           pe="20px"
           m={sidebarMargins}

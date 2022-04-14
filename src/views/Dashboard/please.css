@@ -1,8 +1,81 @@
-.main {
-  width: calc(50% - 20px);
-}
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 3000px) {
   .main {
-    width: calc(100% - 25px);
+    width: 700px !important;
+    display: flex;
+  }
+  .message {
+    max-width: calc(200% - 750px) !important;
+    min-width: calc(200% - 750px) !important;
+  }
+}
+
+@media screen and (max-width: 2250px) {
+  .main {
+    width: 600px !important;
+    display: flex;
+  }
+
+  .message {
+    max-width: calc(200% - 600px) !important;
+    min-width: calc(200% - 600px) !important;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+  .main {
+    width: 500px !important;
+    display: flex;
+  }
+
+  .message {
+    max-width: calc(200% - 500px) !important;
+    min-width: calc(200% - 500px) !important;
+  }
+}
+
+@media screen and (max-width: 1750px) {
+  .main {
+    width: 400px !important;
+    display: flex;
+  }
+
+  .message {
+    max-width: calc(200% - 400px) !important;
+    min-width: calc(200% - 400px) !important;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main {
+    width: 300px !important;
+    display: flex;
+  }
+
+  .message {
+    max-width: calc(200% - 300px) !important;
+    min-width: calc(200% - 300px) !important;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main {
+    width: 300px !important;
+    display: flex;
+  }
+
+  .message {
+    max-width: calc(200% - 300px) !important;
+    min-width: calc(200% - 300px) !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    width: 98% !important;
+  }
+
+  .message {
+    max-width: 180% !important;
+    min-width: 180% !important;
   }
 }

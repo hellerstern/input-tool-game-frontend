@@ -1,0 +1,16 @@
+/* .meeting_tools::-webkit-scrollbar {
+  height: 4px;
+  background-color: red;
+}
+
+.meeting_tools::-webkit-scrollbar-track {
+  background: #282a4f;
+}
+
+.meeting_tools ::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+}
+
+.meeting_tools ::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+} */

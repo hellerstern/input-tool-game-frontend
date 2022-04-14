@@ -28,7 +28,7 @@ export default function SizeExample() {
     useEffect(() => {
         if (!isOpen) {
             try {
-                play();
+                // play();
                 console.log("Audio playing now..");
             } catch (error) {
                 console.log(error);

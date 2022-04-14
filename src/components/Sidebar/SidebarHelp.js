@@ -12,26 +12,14 @@ export function SidebarHelp(props) {
   // Pass the computed styles into the `__css` prop
 
   return (
-    <div>
-      <Image
-        src={logo1}
-        alt="logo1 image"
-        width="180px" height="135px"
-        style={{ marginLeft: "20px", marginTop: "30px", marginBottom: "30px" }}
-      />
-      <Image
-        src={logo2}
-        alt="logo2 image"
-        width="80px" height="80px"
-        style={{ marginLeft: "75px" }}
-      />
-      <Text fontSize="large" fontWeight="bold" color="gray.800" textAlign="center" width="60%" marginLeft="45px;">
-        You Have 2 Pending Tasks
-      </Text>
+    <div style={{ width: "100%", height: "64%", display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "start" }}>
+      <Image src={logo1} alt="logo1 image" width="80%" height="20%" style={{}} />
+      <Image src={logo2} alt="logo2 image" width="80px" height="80px" />
+      <Text fontSize="large" fontWeight="bold" color="gray.800" textAlign="center" width="100%"> You Have 2 Pending Tasks </Text>
       <FormControl>
         <Text style={{ textAlign: "center", padding: "10px", fontSize: 15 }}>Quick View</Text>
-        <Stack direction='column' spacing={4}>
-          <Button colorScheme='orange' variant='solid' width="100%;" size="sm" >
+        <Stack direction='column' spacing={1}>
+          <Button colorScheme='orange' variant='solid' width="100%;" size="sm">
             Voicemail
           </Button>
           <Button colorScheme='orange' variant='solid' width="100%;" size="sm" >
@@ -46,7 +34,6 @@ export function SidebarHelp(props) {
           <Button colorScheme='purple' backgroundColor="blue.300" color="whiteAlpha.900" variant='solid' width="100%;" size="sm" >
             Sim Score
           </Button>
-          <br />
           <Button colorScheme='blackAlpha' color="whiteAlpha.900" width="100%;" size="sm" >
             Return To DeskTop
           </Button>

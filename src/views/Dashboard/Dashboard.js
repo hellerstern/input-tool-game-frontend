@@ -82,6 +82,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 // react icons
 import { BsArrowRight, BsCardImage } from "react-icons/bs";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { FiTrash2 } from 'react-icons/fi';
 import { dashboardTableData, timelineData } from "variables/general";
 import { CardComponent } from "theme/additions/card/Card";
 import Sound from './Audio';
@@ -100,17 +101,17 @@ export default function Dashboard1(props) {
   const [steps, setSetp] = useState(1);
   const toast = useToast();
   const [emails, setEmails] = useState([]);
-  
+
   const ModalShow = (email) => {
-    if (email.cType === 1) {
-      setSpeEmailClicked(true);
-    } else {
-      setsName(email["cName"]);
-      setsEmail(email["cEmail"]);
-      setsImage(email["cAvatar"]);
-      setsData(email["cData"]);
-      onOpen();
-    }
+    // if (email.cType === 1) {
+    //   setSpeEmailClicked(true);
+    // } else {
+    setsName(email["cName"]);
+    setsEmail(email["cEmail"]);
+    setsImage(email["cAvatar"]);
+    setsData(email["cData"]);
+    onOpen();
+    // }
   }
   const [series, setSeries] = useState([
     {
@@ -144,7 +145,7 @@ export default function Dashboard1(props) {
       }, 2000)
     }
   })
-  
+
   const value = "$100.000";
   const history = useHistory();
   // Chakra Color Mode
@@ -156,98 +157,98 @@ export default function Dashboard1(props) {
   let { user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const tempValue = [{
-    'entry': '10000',  'account': 'Bank Account CDN$', 'checked': false
+    'entry': '10000', 'account': 'Bank Account CDN$', 'checked': false
   }, {
-    'entry': '11000',  'account': 'Accounts Receivable', 'checked': false
+    'entry': '11000', 'account': 'Accounts Receivable', 'checked': false
   }, {
-    'entry': '11200',  'account': 'Sales Tax Receivable', 'checked': false
+    'entry': '11200', 'account': 'Sales Tax Receivable', 'checked': false
   }, {
-    'entry': '12000',  'account': 'Inventory', 'checked': false
+    'entry': '12000', 'account': 'Inventory', 'checked': false
   }, {
-    'entry': '13000',  'account': 'Prepaid Rent', 'checked': false
+    'entry': '13000', 'account': 'Prepaid Rent', 'checked': false
   }, {
-    'entry': '13050',  'account': 'Prepaid Insurance', 'checked': false
+    'entry': '13050', 'account': 'Prepaid Insurance', 'checked': false
   }, {
-    'entry': '13100',  'account': 'Prepaid Advertising' , 'checked': false
+    'entry': '13100', 'account': 'Prepaid Advertising', 'checked': false
   }, {
-    'entry': '16000',  'account': 'Vehicles' , 'checked': false
+    'entry': '16000', 'account': 'Vehicles', 'checked': false
   }, {
-    'entry': '16050',  'account': 'Acc Dep - Vehicles' , 'checked': false
+    'entry': '16050', 'account': 'Acc Dep - Vehicles', 'checked': false
   }, {
-    'entry': '16100',  'account': 'Equipment', 'checked': false
+    'entry': '16100', 'account': 'Equipment', 'checked': false
   }, {
-    'entry': '16150',  'account': 'Acc Dep - Equipment' , 'checked': false
+    'entry': '16150', 'account': 'Acc Dep - Equipment', 'checked': false
   }, {
-    'entry': '16200',  'account': 'Furniture and Fixtures' , 'checked': false
+    'entry': '16200', 'account': 'Furniture and Fixtures', 'checked': false
   }, {
-    'entry': '16250',  'account': 'Acc Dep - Furniture' , 'checked': false
+    'entry': '16250', 'account': 'Acc Dep - Furniture', 'checked': false
   }, {
-    'entry': '20000',  'account': 'Accounts Payable' , 'checked': false
+    'entry': '20000', 'account': 'Accounts Payable', 'checked': false
   }, {
-    'entry': '20100',  'account': 'Accrued Liabilities' , 'checked': false
+    'entry': '20100', 'account': 'Accrued Liabilities', 'checked': false
   }, {
-    'entry': '21000',  'account': 'Payroll Liabilities' , 'checked': false
+    'entry': '21000', 'account': 'Payroll Liabilities', 'checked': false
   }, {
-    'entry': '21200',  'account': 'Sales Tax Payable' , 'checked': false
+    'entry': '21200', 'account': 'Sales Tax Payable', 'checked': false
   }, {
-    'entry': '21300',  'account': 'Income Tax Payable' , 'checked': false
+    'entry': '21300', 'account': 'Income Tax Payable', 'checked': false
   }, {
-    'entry': '21400',  'account': 'Customer Deposits' , 'checked': false
+    'entry': '21400', 'account': 'Customer Deposits', 'checked': false
   }, {
-    'entry': '21000',  'account': 'Due to Shareholder' , 'checked': false
+    'entry': '21000', 'account': 'Due to Shareholder', 'checked': false
   }, {
-    'entry': '22000',  'account': 'Bank Loan' , 'checked': false
+    'entry': '22000', 'account': 'Bank Loan', 'checked': false
   }, {
-    'entry': '30000',  'account': "Owner's Capital" , 'checked': false
+    'entry': '30000', 'account': "Owner's Capital", 'checked': false
   }, {
-    'entry': '32000',  'account': 'Retained Earnings' , 'checked': false
+    'entry': '32000', 'account': 'Retained Earnings', 'checked': false
   }, {
-    'entry': '33000',  'account': 'Dividends Paid' , 'checked': false
+    'entry': '33000', 'account': 'Dividends Paid', 'checked': false
   }, {
-    'entry': '41000',  'account': 'Ticket Revenue' , 'checked': false
+    'entry': '41000', 'account': 'Ticket Revenue', 'checked': false
   }, {
-    'entry': '42000',  'account': 'Streaming Revenue' , 'checked': false
+    'entry': '42000', 'account': 'Streaming Revenue', 'checked': false
   }, {
-    'entry': '43000',  'account': 'Merchandise Revenue' , 'checked': false
+    'entry': '43000', 'account': 'Merchandise Revenue', 'checked': false
   }, {
-    'entry': '51000',  'account': 'Venue Rental Expense' , 'checked': false
+    'entry': '51000', 'account': 'Venue Rental Expense', 'checked': false
   }, {
-    'entry': '51100',  'account': 'Commission Expense' , 'checked': false
+    'entry': '51100', 'account': 'Commission Expense', 'checked': false
   }, {
-    'entry': '51200',  'account': 'Travel Expense' , 'checked': false
+    'entry': '51200', 'account': 'Travel Expense', 'checked': false
   }, {
-    'entry': '52000',  'account': 'Recording Expense' , 'checked': false
+    'entry': '52000', 'account': 'Recording Expense', 'checked': false
   }, {
-    'entry': '53000',  'account': 'Cost of Goods Sold - Merchandise' , 'checked': false
+    'entry': '53000', 'account': 'Cost of Goods Sold - Merchandise', 'checked': false
   }, {
-    'entry': '53100',  'account': 'Merch Commission Expense' , 'checked': false
+    'entry': '53100', 'account': 'Merch Commission Expense', 'checked': false
   }, {
-    'entry': '60000',  'account': 'Accounting Service Fees' , 'checked': false
+    'entry': '60000', 'account': 'Accounting Service Fees', 'checked': false
   }, {
-    'entry': '60100',  'account': 'Ad and Promotion' , 'checked': false
+    'entry': '60100', 'account': 'Ad and Promotion', 'checked': false
   }, {
-    'entry': '60400',  'account': 'Bank Service Charges' , 'checked': false
+    'entry': '60400', 'account': 'Bank Service Charges', 'checked': false
   }, {
-    'entry': '60500',  'account': 'Internet and Cell Expense', 'checked': false
+    'entry': '60500', 'account': 'Internet and Cell Expense', 'checked': false
   }, {
-    'entry': '60600',  'account': 'Depreciation Expense' , 'checked': false
+    'entry': '60600', 'account': 'Depreciation Expense', 'checked': false
   }, {
-    'entry': '61000',  'account': 'Rent Expense' , 'checked': false
+    'entry': '61000', 'account': 'Rent Expense', 'checked': false
   }, {
-    'entry': '61200',  'account': 'Insurance Expense' , 'checked': false
+    'entry': '61200', 'account': 'Insurance Expense', 'checked': false
   }, {
-    'entry': '61300',  'account': 'Other Revenue and Expense' , 'checked': false
+    'entry': '61300', 'account': 'Other Revenue and Expense', 'checked': false
   }, {
-    'entry': '62000',  'account': 'Interest Expense' , 'checked': false
+    'entry': '62000', 'account': 'Interest Expense', 'checked': false
   }, {
-    'entry': '80000',  'account': 'Income Tax Expense' , 'checked': false
+    'entry': '80000', 'account': 'Income Tax Expense', 'checked': false
   }];
   const [dropDownMenu, setDropDownMenu] = useState(tempValue);
   // const [dropDownMenuData, setDropDownMenuData] = useState([]);
   const [rendered, setRendered] = useState(false);
   const [countOfTr, setCountOfTr] = useState(10);
   const [totalValue, setTotalValue] = useState([0, 0]);
-  const [speEmailClicked, setSpeEmailClicked] = useState(false);
+  const [speEmailClicked, setSpeEmailClicked] = useState(true);
   const handleSelect = (index) => {
     if (!dropDownMenu[index].checked && tableData.length >= 10) {
       toast({
@@ -255,13 +256,13 @@ export default function Dashboard1(props) {
         status: 'warning',
         isClosable: true,
       })
-      return false;  
-    } 
+      return false;
+    }
     var arr = tableData;
     var dropDownMenuData = dropDownMenu;
     dropDownMenuData[index].checked = !dropDownMenuData[index].checked;
     var ind = arr.findIndex((element) => element.acc === dropDownMenuData[index].account);
-    if (ind !== -1)  {
+    if (ind !== -1) {
       arr.splice(ind, 1);
       setTableData(arr);
     } else {
@@ -292,10 +293,12 @@ export default function Dashboard1(props) {
 
   const renderTable = () => {
     const temp = [];
-    for(var i = 0; i < 10; i++) {
-      if (i >= tableData.length) {
+    const please = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    please.map((item, index) => {
+      if (index >= tableData.length) {
         temp.push(
-          <Tr key={`tbl_${i}`}>
+          <Tr key={`tbl_${index}`}>
+            <Td pl="5px"></Td>
             <Td pl="5px"></Td>
             <Td pl="5px"></Td>
             <Td pl="5px"></Td>
@@ -305,22 +308,39 @@ export default function Dashboard1(props) {
       }
       else {
         temp.push(
-          <Tr key={`tbl_${i}`} maxH="10px" id={i}>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{i+1}</Td>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{tableData[i].acc}</Td>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`debit_${i}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
-            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`credit_${i}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
+          <Tr key={`tbl_${index}`} maxH="10px" id={index}>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{index + 1}</Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px">{tableData[index].acc}</Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`debit_${index}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><Input type="number" h="98%" minW="70px" borderRadius="3px" id={`credit_${index}`} onChange={(e) => func_table_update(e)} bgColor="lightgrey"></Input></Td>
+            <Td paddingBottom="6px" paddingTop="6px" pl="5px"><FiTrash2 onClick={() => delTr(tableData[item], index)} /></Td>
           </Tr>
         );
       }
-    }
+    })
     return temp;
+  }
+
+  const delTr = (itm, ind) => {
+    var arr = tableData;
+    arr.splice(ind, 1);
+    setTableData(arr);
+    var flg = 0;
+    dropDownMenu.map((item, index) => {
+      if (item.account === itm.acc) {
+        flg = index;
+      }
+    })
+    arr = dropDownMenu;
+    arr.splice(flg, 1);
+    setDropDown(arr);
+    setCountOfTr(0);
   }
 
   const func_table_update = async (e) => {
     var arr = tableData;
     var sId = e.target.id;
-    arr[sId.slice(sId.indexOf("_")+1)][sId.slice(0, sId.indexOf("_"))].num = e.target.value;
+    arr[sId.slice(sId.indexOf("_") + 1)][sId.slice(0, sId.indexOf("_"))].num = e.target.value;
     setTableData(arr);
     func_total_update();
   }
@@ -337,7 +357,7 @@ export default function Dashboard1(props) {
   const func_get_date = () => {
     var txt = '';
     const today = new Date();
-    txt += today.toLocaleString('default', {month: 'short'});
+    txt += today.toLocaleString('default', { month: 'short' });
     txt += "-" + today.getDate() + "-";
     txt += today.getFullYear();
     return txt;
@@ -354,7 +374,7 @@ export default function Dashboard1(props) {
       setDropDownMenu(tempValue);
       setTableData([]);
       setTotalValue([0, 0]);
-      setSetp(steps+1);
+      setSetp(steps + 1);
     } else {
       toast({
         title: "Maybe you selected some wrong items.",
@@ -364,14 +384,13 @@ export default function Dashboard1(props) {
     }
   }
 
-
   const func_card = () => {
     var temp = [];
     emails.map((item, index) => {
       temp.push(
-        <Card minH="83px" minWidth="100px" onClick={() => ModalShow(item)}>
-          <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="calc(100% - 100px)">
+        <Card minH="83px" maxWidth="calc(200% - 550px)" minWidth="calc(200% - 600px)" onClick={() => ModalShow(item)} className="message">
+          <CardBody display="flex" flexWrap="wrap">
+            <Flex flexDirection="row" align="center" justify="center" w="calc(100% - 40px)">
               <Stat me="auto">
                 <StatLabel
                   fontSize="sm"
@@ -383,7 +402,7 @@ export default function Dashboard1(props) {
                 </StatLabel>
                 <Flex style={{ marginTop: "10px" }}>
                   <StatNumber fontSize="17px">
-                    <ReadMoreText text="Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."/>
+                    <ReadMoreText text="Just Following up on my voicemail regarding the Aritcles of Incorporation for your client. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -393,6 +412,7 @@ export default function Dashboard1(props) {
               alt="old man image"
               width="100px" height="120px"
               style={{ position: "absolute", bottom: "0", right: "0" }}
+              class="100px"
             />
           </CardBody>
         </Card>
@@ -402,37 +422,38 @@ export default function Dashboard1(props) {
   }
 
   return (
-    <Box w="100%" h="100%" backgroundColor="gray.200" padding="5" position="relative">
+    <Box w="100%" backgroundColor={"gray.200"} padding="5" position="relative" h="100vh">
       <Box className="main"
-        h="700px"
+        w="800px"
+        h="60%"
         backgroundImage={`url(${ImgCard})`}
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
         position="absolute"
         borderRadius="10px"
-        right="5"
-        zIndex="2"
+        right="2"
+        zIndex="3"
         display={!(props.flg_pic && !props.flg_meeting) ? "none" : speEmailClicked ? "flex" : "none"}
         justifyContent="center"
         alignItems="center"
       >
         <Box width="80%" height="95%" display="flex" justifyContent="center" alignItems="center" flexWrap="wrap">
-          <Box w="100%" h="20%" display="flex">
-            <Box w="50%" height="100%" display="flex" justifyContent="center" flexWrap="wrap">
-              <Button marginTop="40px" w="80%">{ JSON.parse(localStorage.getItem('user')).username }</Button>
-              <Button w="80%" onClick={() => setDropDown(!sDropDown)}>{`1-${steps}`}</Button>
-              <Box display={sDropDown === false ? "none" : "block" } position="absolute" w="300px" h="500px" zIndex="4" top="calc(20% + 10px)" right="calc(90% - 300px)" backdropFilter="blur(5px)" boxShadow="3px 3px 4px 4px lightgrey" overflowY="scroll">
+          <Box w="100%" h="150px" display="flex">
+            <Box w="50%" height="100%" display="flex" justifyContent="center" flexWrap="wrap" alignItems="end">
+              <Button w="80%" mt="20px">{JSON.parse(localStorage.getItem('user')).username}</Button>
+              <Button w="80%" onClick={() => setDropDown(!sDropDown)} mb="10px">{`1-${steps}`}</Button>
+              <Box display={sDropDown === false ? "none" : "block"} position="absolute" w="300px" h="500px" zIndex="4" top="calc(20% + 10px)" right="calc(90% - 300px)" backdropFilter="blur(5px)" boxShadow="3px 3px 4px 4px lightgrey" overflowY="scroll">
                 {
                   dropDownMenu.map((item, index) => (
-                    <Box onClick={() => {handleSelect(index)}} border="1px" pl="20px" borderColor="lightgrey" cursor="pointer" backgroundColor={dropDownMenu[index].checked ? "lightblue":"transparent"} key={`menu_${index}`}> {item.account} </Box>
+                    <Box onClick={() => { handleSelect(index) }} border="1px" pl="20px" borderColor="lightgrey" cursor="pointer" backgroundColor={dropDownMenu[index].checked ? "lightblue" : "transparent"} key={`menu_${index}`}> {item.entry + " " + item.account}</Box>
                   ))
                 }
               </Box>
             </Box>
             <Box w="50%" height="100%" display="flex" justifyContent="center" alignItems="stretch" flexWrap="wrap">
-              <Box w="100%" height="45%" backgroundImage={`url(${ImgTornodo})`} backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize="contain"></Box>
-              <Box w="100%" height="45%" marginTop="25px">
+              <Box w="100%" height="65%" backgroundImage={`url(${ImgTornodo})`} backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize="contain"></Box>
+              <Box w="100%" height="45%" mt="3px">
                 <Button w="100%">
                   {
                     func_get_date()
@@ -442,7 +463,7 @@ export default function Dashboard1(props) {
             </Box>
           </Box>
 
-          <Box w="100%" h="73%" backgroundColor="white" borderRadius="5px">
+          <Box w="100%" h="calc(100% - 200px)" backgroundColor="white" borderRadius="5px" overflowY="scroll">
             <TableContainer onClick={() => setDropDown(false)}>
               <Table variant='simple'>
                 <Thead>
@@ -451,6 +472,7 @@ export default function Dashboard1(props) {
                     <Th w="40%" pl="5px" pr="0">Account #-Account Name</Th>
                     <Th w="20%" pl="5px" pr="0">Debit</Th>
                     <Th w="20%" pl="5px" pr="0">Credit</Th>
+                    <Th w="20%" pl="5px" pr="0">del</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -473,115 +495,115 @@ export default function Dashboard1(props) {
               </Table>
             </TableContainer>
           </Box>
-          <Box w="100%" paddingTop="10px" display="flex" justifyContent="space-between">
-            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" onClick={() => setSpeEmailClicked(false)} ml="30px">Close</Button>
-            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" onClick={() => {
+          <Box w="100%" paddingTop="5px" display="flex" justifyContent="end">
+            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" color="white" onClick={() => setSpeEmailClicked(false)} ml="30px" height="30px">Close</Button>
+            <Button mr="30px" bgColor="#f0731a" borderRadius="10px" color="white" onClick={() => {
               func_save();
-            }}>Save</Button>
+            }} height="30px">Save</Button>
           </Box>
         </Box>
       </Box>
       <VideoPlay />
-        <FormControl zIndex="1">
-          <Stack direction='row' spacing={4} style={{ position: "absolute", right: "0" }}>
-            <Button colorScheme='telegram' backgroundColor="blue.200" variant='solid' width="100px;" size="sm">
-              Settings
-            </Button>
-            <Button colorScheme='telegram' backgroundColor="blue.400" variant='solid' width="100px;" size="sm" onClick={SignOut}>
-              Logout
-            </Button>
-          </Stack>
-        </FormControl>
-        <Flex flexDirection="column" pt={{ base: "100px", md: "35px" }}>
+      <FormControl zIndex="1">
+        <Stack direction='row' spacing={4} style={{ position: "absolute", right: "0" }}>
+          <Button colorScheme='telegram' backgroundColor="blue.200" variant='solid' width="100px;" size="sm">
+            Settings
+          </Button>
+          <Button colorScheme='telegram' backgroundColor="blue.400" variant='solid' width="100px;" size="sm" onClick={SignOut}>
+            Logout
+          </Button>
+        </Stack>
+      </FormControl>
+      <Flex flexDirection="column" pt={{ base: "100px", md: "35px" }} onClick={() => setDropDown(false)}>
 
-          <SimpleGrid columns={{ sm: 2, md: 2, xl: 2 }} spacing="24px">
-            {/* left */}
-            <Box columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
-              <Stat me="auto" marginBottom="10px">
-                <StatLabel
-                  fontSize="lg"
-                  color="gray.600"
-                  fontWeight="bold"
-                  marginLeft="20px;"
-                  display={emails.length > 0 ? 'block' : 'none'}
-                >
-                  New Emails
-                </StatLabel>
-              </Stat>
-              {
-                func_card()
-              }
-            </Box>
+        <SimpleGrid columns={{ sm: 2, md: 2, xl: 2 }} spacing="24px">
+          {/* left */}
+          <Box columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
+            <Stat me="auto" marginBottom="10px">
+              <StatLabel
+                fontSize="lg"
+                color="gray.600"
+                fontWeight="bold"
+                marginLeft="20px;"
+                display={emails.length > 0 ? 'block' : 'none'}
+              >
+                New Emails
+              </StatLabel>
+            </Stat>
+            {
+              func_card()
+            }
+          </Box>
 
-            {/* Don't touch it */}
-            <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px" opacity={0}>
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="lg"
-                  color="gray.600"
-                  fontWeight="bold"
-                  marginLeft="20px;"
-                >
-                  Your Status
-                </StatLabel>
-              </Stat>
-              <Card minH="auto" backgroundColor="green.200" onClick={() => ModalShow(4, youthMan)}>
-                <CardBody>
-                  <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                      <StatLabel
-                        fontSize="sm"
-                        color="whiteAlpha.900"
-                        fontWeight="bold"
-                        pb=".1rem"
-                      >
-                        Congratulations Kyle!
-                      </StatLabel>
-                      <Flex style={{ marginTop: "10px" }}>
-                        <StatNumber fontSize="smaller" fontWeight="100" variant='solid' color="whiteAlpha.900" paddingRight="20%">
-                          So fa so good. Keep up the good work. With only 4 more months to go you' re proving you can handle anything thrown at you!
-                        </StatNumber>
-                      </Flex>
-                    </Stat>
-                  </Flex>
-                  <Image
-                    src={youthMan}
-                    alt="chakra image"
-                    width="100px" height="120px"
-                    style={{ position: "absolute", bottom: "0", right: "0" }}
-                  />
-                </CardBody>
-              </Card>
-              <Card minH="83px" minWidth="100px">
-                <CardHeader mb="20px" pl="22px">
-                  <Flex direction="column" alignSelf="flex-start">
-                    <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
-                      Year Snapshot
-                    </Text>
-                    <Text fontSize="smaller" fontWeight="medium" color="gray.400">
-                      Monthly Revenue (in 1,000s)
-                    </Text>
-                  </Flex>
-                </CardHeader>
-                <Box w="100%" h={{ sm: "300px" }} ps="8px">
-                  <LineChart />
-                </Box>
-                <Text fontSize="small" fontWeight="bold" color="blue.400"><a style={{ color: "black" }}>View</a>: Revenue | Expenses | Loans | Capital | Net income</Text>
-              </Card>
-            </SimpleGrid>
-            
+          {/* Don't touch it */}
+          <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px" opacity={0}>
+            <Stat me="auto">
+              <StatLabel
+                fontSize="lg"
+                color="gray.600"
+                fontWeight="bold"
+                marginLeft="20px;"
+              >
+                Your Status
+              </StatLabel>
+            </Stat>
+            <Card minH="auto" backgroundColor="green.200" onClick={() => ModalShow(4, youthMan)}>
+              <CardBody>
+                <Flex flexDirection="row" align="center" justify="center" w="100%">
+                  <Stat me="auto">
+                    <StatLabel
+                      fontSize="sm"
+                      color="whiteAlpha.900"
+                      fontWeight="bold"
+                      pb=".1rem"
+                    >
+                      Congratulations Kyle!
+                    </StatLabel>
+                    <Flex style={{ marginTop: "10px" }}>
+                      <StatNumber fontSize="smaller" fontWeight="100" variant='solid' color="whiteAlpha.900" paddingRight="20%">
+                        So fa so good. Keep up the good work. With only 4 more months to go you' re proving you can handle anything thrown at you!
+                      </StatNumber>
+                    </Flex>
+                  </Stat>
+                </Flex>
+                <Image
+                  src={youthMan}
+                  alt="chakra image"
+                  width="100px" height="120px"
+                  style={{ position: "absolute", bottom: "0", right: "0" }}
+                />
+              </CardBody>
+            </Card>
+            <Card minH="83px" minWidth="100px">
+              <CardHeader mb="20px" pl="22px">
+                <Flex direction="column" alignSelf="flex-start">
+                  <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
+                    Year Snapshot
+                  </Text>
+                  <Text fontSize="smaller" fontWeight="medium" color="gray.400">
+                    Monthly Revenue (in 1,000s)
+                  </Text>
+                </Flex>
+              </CardHeader>
+              <Box w="100%" h={{ sm: "300px" }} ps="8px">
+                <LineChart />
+              </Box>
+              <Text fontSize="small" fontWeight="bold" color="blue.400"><a style={{ color: "black" }}>View</a>: Revenue | Expenses | Loans | Capital | Net income</Text>
+            </Card>
           </SimpleGrid>
-        </Flex>
 
-        <Modal onClose={onClose} size="6xl" isOpen={isOpen} isCentered>
-          <ModalOverlay />
-          <ModalContent borderRadius={50} >
-            <ModalCloseButton marginTop={5} marginRight={5} />
-            <ModalBody padding={0}>
-              <ModalBodyContent modalbodyName={sName} modalbodyEmail={sEmail} modalbodyImage={sImage} modalbodyData={sData} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Box>
+        </SimpleGrid>
+      </Flex>
+
+      <Modal onClose={onClose} size="6xl" isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent borderRadius={50} >
+          <ModalCloseButton marginTop={5} marginRight={5} />
+          <ModalBody padding={0}>
+            <ModalBodyContent modalbodyName={sName} modalbodyEmail={sEmail} modalbodyImage={sImage} modalbodyData={sData} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </Box>
   );
 }
