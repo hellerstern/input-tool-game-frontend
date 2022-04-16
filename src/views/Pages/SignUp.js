@@ -119,7 +119,7 @@ export default function SignUp() {
         return setError(response.data.msg);
       }
       setError("Email Verifying...");
-      // return history.push("/auth/signin");
+      return history.push("/auth/signin");
     } catch (err) {
       console.log(err);
       if (err.response) {
